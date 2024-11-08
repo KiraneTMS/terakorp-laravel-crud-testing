@@ -25,6 +25,11 @@
                     Add New Hospital
                 </button>
 
+                <!-- Search Bar -->
+                <div class="mb-4">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search hospitals..." />
+                </div>
+
                 <!-- Hospital Table -->
                 <table class="w-full bg-gray-100 rounded-md shadow-md table-auto">
                     <thead class="text-left bg-green-200">
@@ -107,6 +112,15 @@
 
             let isHospitalEdit = false;
             let editHospitalId = null;
+
+            // Search functionality
+            $('#searchInput').on('keyup', function() {
+                const searchTerm = $(this).val().toLowerCase();
+                $('#hospitalTable tr').each(function() {
+                    const rowText = $(this).text().toLowerCase();
+                    $(this).toggle(rowText.indexOf(searchTerm) > -1);
+                });
+            });
 
             // Open modal for adding new hospital
             $('#addHospitalBtn').on('click', function() {

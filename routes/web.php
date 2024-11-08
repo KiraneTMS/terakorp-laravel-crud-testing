@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -10,9 +11,7 @@ Route::get('/', function () {
 // Apply 'auth' middleware to group protected routes
 Route::middleware(['auth'])->group(function () {
     // Dashboard route
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // resource routes for hospitals and patients
     Route::resource('hospitals', HospitalController::class);

@@ -25,6 +25,11 @@
                     Add New Patient
                 </button>
 
+                <!-- Search Box -->
+                <div class="mb-4">
+                    <input type="text" id="searchPatient" class="w-full p-2 border border-gray-300 rounded-md form-input focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search Patient...">
+                </div>
+
                 <!-- Patient Table -->
                 <table class="w-full bg-gray-100 rounded-md shadow-md table-auto">
                     <thead class="text-left bg-blue-200">
@@ -111,6 +116,20 @@
 
             let isEdit = false;
             let editId = null;
+
+            // Search
+            $('#searchPatient').on('keyup', function() {
+                const searchTerm = $(this).val().toLowerCase();
+
+                $('#patientTable tr').each(function() {
+                    const rowText = $(this).text().toLowerCase();
+                    if (rowText.indexOf(searchTerm) !== -1) {
+                        $(this).show();
+                    } else {
+                        $(this).hide()
+                    }
+                });
+            });
 
             // Open the modal for adding a new patient
             $('#addPatientBtn').on('click', function() {
